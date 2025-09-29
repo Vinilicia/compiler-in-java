@@ -49,7 +49,10 @@ public class Token {
 
     public static void saveTokensToJsonFile(List<Token> tokens, String filename)
         throws IOException {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Gson gson = new GsonBuilder()
+            .setPrettyPrinting()
+            .disableHtmlEscaping()
+            .create();
         try (FileWriter writer = new FileWriter(filename)) {
             gson.toJson(tokens, writer);
         }
