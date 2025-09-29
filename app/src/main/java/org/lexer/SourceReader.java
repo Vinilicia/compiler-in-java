@@ -1,8 +1,7 @@
 package org.lexer;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +9,13 @@ public class SourceReader {
 
     private final List<Character> characters = new ArrayList<>();
 
-    public SourceReader(String filePath) throws IOException {
-        String content = Files.readString(Paths.get(filePath));
+    public SourceReader(String resourceName) throws IOException {
+        InputStream in = getClass().getResourceAsStream("/" + resourceName);
+        if (in == null) {
+            throw new IOException("Resource not found: " + resourceName);
+        }
+
+        String content = new String(in.readAllBytes());
 
         for (char c : content.toCharArray()) {
             characters.add(c);
