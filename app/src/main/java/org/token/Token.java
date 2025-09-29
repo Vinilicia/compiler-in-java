@@ -2,11 +2,8 @@ package org.token;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Token {
@@ -50,31 +47,11 @@ public class Token {
         );
     }
 
-    public void saveToJsonFile(String filename) {
+    public static void saveTokensToJsonFile(List<Token> tokens, String filename)
+        throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        List<Token> tokens = new ArrayList<>();
-
-        try {
-            File file = new File(filename);
-            if (file.exists()) {
-                FileReader reader = new FileReader(file);
-                Token[] existingTokens = gson.fromJson(reader, Token[].class);
-                if (existingTokens != null) {
-                    for (Token t : existingTokens) {
-                        tokens.add(t);
-                    }
-                }
-                reader.close();
-            }
-
-            tokens.add(this);
-
-            FileWriter writer = new FileWriter(file);
+        try (FileWriter writer = new FileWriter(filename)) {
             gson.toJson(tokens, writer);
-            writer.flush();
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }
