@@ -2,6 +2,7 @@
 /build/
 /app/build/
 ./gradle/
+.gradle/
 
 # Configurações locais de IDE
 *.iml
