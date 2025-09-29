@@ -1,0 +1,22 @@
+# Arquivos de build
+/build/
+/app/build/
+./gradle/
+
+# Configurações locais de IDE
+*.iml
+*.ipr
+*.iws
+.idea/
+.vscode/
+.project
+.settings/
+.classpath
+
+# SO
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
