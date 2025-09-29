@@ -16,6 +16,12 @@ public class Lexer {
     public List<Token> tokenize() {
         List<Token> tokens = new ArrayList<>();
 
+        int lineNumber = 1;
+        int state = 0;
+
+        for (char c : characters) {
+            System.out.println(c);
+        }
         return tokens;
     }
 }
