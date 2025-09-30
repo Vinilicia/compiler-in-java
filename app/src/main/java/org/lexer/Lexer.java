@@ -92,6 +92,12 @@ public class Lexer {
                         case '>':
                             state = 4;
                             break;
+                        case '\'':
+                            state = 10;
+                            break;
+                        case '\"':
+                            state = 12;
+                            break;
                         default:
                             if (Character.isLetter(c)) {
                                 state = 6;
@@ -188,6 +194,29 @@ public class Lexer {
                     if (!Character.isDigit(c)) {
                         actualTokenType = TokenType.FLOAT_CONST;
                         isLastCharacterUsed = false;
+                        isLexemeOver = true;
+                        state = 0;
+                    }
+                    break;
+                case 10:
+                    if (c == '\'') {
+                        actualTokenType = TokenType.CHAR_LITERAL;
+                        isLexemeOver = true;
+                        state = 0;
+                    } else {
+                        state = 11;
+                    }
+                    break;
+                case 11:
+                    if (c == '\'') {
+                        actualTokenType = TokenType.CHAR_LITERAL;
+                        isLexemeOver = true;
+                        state = 0;
+                    }
+                    break;
+                case 12:
+                    if (c == '\"') {
+                        actualTokenType = TokenType.FMT_STRING;
                         isLexemeOver = true;
                         state = 0;
                     }
