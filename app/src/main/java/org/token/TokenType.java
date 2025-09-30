@@ -35,5 +35,6 @@ public enum TokenType {
     INT_CONST,
     FLOAT_CONST,
     CHAR_LITERAL,
-    FMT_STRING
+    FMT_STRING,
+    ERROR,
 }
