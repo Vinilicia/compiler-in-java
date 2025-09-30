@@ -3,6 +3,7 @@
 /app/build/
 ./gradle/
 .gradle/
+./app/bin/
 
 # Configurações locais de IDE
 *.iml
@@ -20,4 +21,6 @@ Thumbs.db
 
 # Logs
 *.log
+
+./app/src/main/resources/
 
