@@ -120,11 +120,13 @@ public class Lexer {
                 case 2:
                     if (c == '=') {
                         actualTokenType = TokenType.NE;
-                        isLexemeOver = true;
-                        state = 0;
                     } else {
                         System.out.println("Erro na linha " + lineNumber);
+                        actualTokenType = TokenType.ERROR;
+                        isLastCharacterUsed = false;
                     }
+                    isLexemeOver = true;
+                    state = 0;
                     break;
                 case 3:
                     if (c == '=') {
@@ -188,6 +190,10 @@ public class Lexer {
                         state = 9;
                     } else {
                         System.out.println("Erro na linha " + lineNumber);
+                        actualTokenType = TokenType.ERROR;
+                        isLastCharacterUsed = false;
+                        isLexemeOver = true;
+                        state = 0;
                     }
                     break;
                 case 9:
@@ -210,9 +216,12 @@ public class Lexer {
                 case 11:
                     if (c == '\'') {
                         actualTokenType = TokenType.CHAR_LITERAL;
-                        isLexemeOver = true;
-                        state = 0;
+                    } else {
+                        actualTokenType = TokenType.ERROR;
+                        isLastCharacterUsed = false;
                     }
+                    isLexemeOver = true;
+                    state = 0;
                     break;
                 case 12:
                     if (c == '\"') {
