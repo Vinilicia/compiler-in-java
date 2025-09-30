@@ -20,6 +20,7 @@ public class SourceReader {
         for (char c : content.toCharArray()) {
             characters.add(c);
         }
+        characters.add(' ');
     }
 
     public List<Character> getCharacters() {

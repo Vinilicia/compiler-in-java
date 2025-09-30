@@ -28,18 +28,18 @@ public class Lexer {
         while(i < characters.size()) {
             isLastCharacterUsed = true;
             char c = characters.get(i);
+
+            if (lexeme == "" && Character.isWhitespace(c)) {
+                if (c == '\n') {
+                    lineNumber++;
+                }
+                i++;
+                continue; // skip to next character
+            }
+
             switch (state) {
                 case 0:
                     switch(c) {
-                        case '\n':
-                            lexeme = "";
-                            lineNumber++;
-                            break;
-                        
-                        case ' ':
-                            lexeme = "";
-                            break;
-
                         case '(':
                             actualTokenType = TokenType.LBRACE;
                             isLexemeOver = true;
@@ -177,13 +177,13 @@ public class Lexer {
 
                     } else {
                         var reservedMap = reservedWords.getReservedWords();
+                        System.err.println("fudeu nao");
+
                         if(!reservedMap.containsKey(lexeme)){
                             actualTokenType = TokenType.ID;
-                            System.err.println("sou gay");
                         }
                         else{
                             actualTokenType = reservedMap.get(lexeme);
-                            System.err.println("sou gay");
                         }
                         isLastCharacterUsed = false;
                         state = 0;
@@ -214,6 +214,7 @@ public class Lexer {
                 lexeme = "";
                 isLexemeOver = false;
             }
+            
         }
         return tokens;
     }
