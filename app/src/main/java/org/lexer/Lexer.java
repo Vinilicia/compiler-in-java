@@ -18,6 +18,7 @@ public class Lexer {
     public List<Token> tokenize() {
         List<Token> tokens = new ArrayList<>();
         String lexeme = new String();
+        lexeme = "";
         int lineNumber = 1;
         int state = 0;
         boolean isLexemeOver = false;
@@ -92,6 +93,9 @@ public class Lexer {
                         case '>':
                             state = 4;
                             break;
+                        case '<':
+                            state = 5;
+                            break;
                         case '\'':
                             state = 10;
                             break;
@@ -103,6 +107,10 @@ public class Lexer {
                                 state = 6;
                             } else if (Character.isDigit(c)) {
                                 state = 7;
+                            }
+                            else{
+                                actualTokenType = TokenType.ERROR;
+                                isLexemeOver = true;
                             }
                             break;
                     }
@@ -121,7 +129,6 @@ public class Lexer {
                     if (c == '=') {
                         actualTokenType = TokenType.NE;
                     } else {
-                        System.out.println("Erro na linha " + lineNumber);
                         actualTokenType = TokenType.ERROR;
                         isLastCharacterUsed = false;
                     }
@@ -182,6 +189,7 @@ public class Lexer {
                             actualTokenType = TokenType.INT_CONST;
                             isLastCharacterUsed = false;
                             isLexemeOver = true;
+                            state = 0;
                         }
                     }
                     break;
@@ -189,7 +197,6 @@ public class Lexer {
                     if (Character.isDigit(c)) {
                         state = 9;
                     } else {
-                        System.out.println("Erro na linha " + lineNumber);
                         actualTokenType = TokenType.ERROR;
                         isLastCharacterUsed = false;
                         isLexemeOver = true;

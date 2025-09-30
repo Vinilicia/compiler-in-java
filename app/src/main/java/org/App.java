@@ -9,7 +9,7 @@ public class App {
 
     public static void main(String[] args) {
         try {
-            String inputFile = "test.p";
+            String inputFile = "loop_simples.p";
             String outputFile = inputFile.replace(".p", "_tokens.json");
 
             SourceReader reader = new SourceReader(inputFile);
