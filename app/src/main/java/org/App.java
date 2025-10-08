@@ -14,7 +14,7 @@ public class App {
                 processFile(arg);
             }
         } else {
-            processFile("src/main/resources/fibo.p");
+            processFile("src/main/resources/soma.p");
         }
     }
 

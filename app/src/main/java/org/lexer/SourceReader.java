@@ -19,6 +19,7 @@ public class SourceReader {
             characters.add(c);
         }
         characters.add(' ');
+        in.close();
     }
 
     public List<Character> getCharacters() {
