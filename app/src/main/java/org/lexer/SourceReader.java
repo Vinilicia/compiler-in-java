@@ -1,5 +1,6 @@
 package org.lexer;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -9,11 +10,8 @@ public class SourceReader {
 
     private final List<Character> characters = new ArrayList<>();
 
-    public SourceReader(String resourceName) throws IOException {
-        InputStream in = getClass().getResourceAsStream("/" + resourceName);
-        if (in == null) {
-            throw new IOException("Resource not found: " + resourceName);
-        }
+    public SourceReader(String filePath) throws IOException {
+        InputStream in = new FileInputStream(filePath);
 
         String content = new String(in.readAllBytes());
 

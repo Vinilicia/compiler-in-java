@@ -49,33 +49,35 @@ This will compile the source code and create an executable JAR file in the `app/
 
 ## Running
 
-To run the application, you first need to specify the input file in the `app/src/main/java/org/App.java` file. Edit the `inputFile` variable to the name of the file you want to process. The file must be located in the `app/src/main/resources` directory.
+You can run the application in two ways:
 
-For example, to process the `soma.p` file, you would change the `App.java` file to look like this:
+### With File Arguments
 
-```java
-public class App {
+You can pass one or more source files as arguments. The paths should be relative to the project root.
 
-    public static void main(String[] args) {
-        try {
-            String inputFile = "soma.p"; // Change this line
-            String outputFile = inputFile.replace(".p", "_tokens.json");
-
-            SourceReader reader = new SourceReader(inputFile);
-//...
+```bash
+./gradlew run --args="<file1.p> <file2.p> ..."
 ```
 
-Once you have set the input file, you can run the application using the `run` task from Gradle:
+For example, to run the compiler on the `soma.p` and `media.p` example files, use the following command:
+
+```bash
+./gradlew run --args="./src/main/resources/soma.p ./src/main/resources/media.p"
+```
+
+### Without Arguments
+
+If you run the application without any arguments, it will process a default file specified in `app/src/main/java/org/App.java`.
 
 ```bash
 ./gradlew run
 ```
 
-This will generate a token file in the `output` directory.
-
 ## Usage
 
-The compiler will process the file specified in `app/src/main/java/org/App.java`. For the input file, the compiler will tokenize it and save the resulting tokens to a JSON file.
+The compiler takes one or more arguments, which are the paths to the source files to compile. For each input file, the compiler will tokenize it and save the resulting tokens to a JSON file.
+
+If no arguments are provided, a default file is processed.
 
 ### Output
 
