@@ -16,7 +16,7 @@ public class Syntactic {
         this.tokens = tokens;
         this.token = tokens.get(0);
         this.i = 0;
-        //this.syntacticErrors = new ArrayList<>();
+        this.syntacticErrors = new ArrayList<>();
     }
 
     public void PrintError() {
@@ -187,11 +187,11 @@ public class Syntactic {
                 break;
             case PRINTLN:
                 match(TokenType.PRINTLN);
-                match(TokenType.LBRACE);
+                match(TokenType.LBRACKET);
                 match(TokenType.FMT_STRING);
                 match(TokenType.COMMA);
                 ListaArgs();
-                match(TokenType.RBRACE);
+                match(TokenType.RBRACKET);
                 match(TokenType.SEMICOLON);
                 break;
             case RETURN:
