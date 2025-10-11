@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.List;
 import org.lexer.Lexer;
 import org.lexer.SourceReader;
+import org.syntactic.Syntactic;
+import org.syntactic.SyntacticError;
 import org.token.Token;
 
 public class App {
@@ -22,18 +24,25 @@ public class App {
         try {
             File inputFile = new File(filePath);
             String fileName = inputFile.getName();
-            String outputFileName = "output/" + fileName.replace(".p", "_tokens.json");
+            String outputFileNameLexer = "output/" + fileName.replace(".p", "_tokens.json");
+            String outputFileNameSyntactic = "output/" + fileName.replace(".p", "_syntactic_errors.json");
+
 
             // Create output directory if it doesn't exist
             new File("output").mkdirs();
 
             SourceReader reader = new SourceReader(filePath);
+
             Lexer lexer = new Lexer(reader.getCharacters());
             List<Token> tokens = lexer.tokenize();
+            Token.saveTokensToJsonFile(tokens, outputFileNameLexer);
 
-            Token.saveTokensToJsonFile(tokens, outputFileName);
+            Syntactic syntactic = new Syntactic(tokens);
+            List<SyntacticError> syntacticErrors = syntactic.syntacticAnalysis();
+            SyntacticError.saveSyntacticErrorsToJsonFile(syntacticErrors, outputFileNameSyntactic);
 
-            System.out.println("Tokens saved to " + outputFileName);
+
+            System.out.println("Files saved to " + filePath);
         } catch (Exception e) {
             System.err.println("Error processing file: " + filePath);
             e.printStackTrace();
