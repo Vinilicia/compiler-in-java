@@ -42,19 +42,19 @@ public class Lexer {
                 case 0:
                     switch (c) {
                         case '(':
-                            actualTokenType = TokenType.LBRACE;
-                            isLexemeOver = true;
-                            break;
-                        case ')':
-                            actualTokenType = TokenType.RBRACE;
-                            isLexemeOver = true;
-                            break;
-                        case '{':
                             actualTokenType = TokenType.LBRACKET;
                             isLexemeOver = true;
                             break;
-                        case '}':
+                        case ')':
                             actualTokenType = TokenType.RBRACKET;
+                            isLexemeOver = true;
+                            break;
+                        case '{':
+                            actualTokenType = TokenType.LBRACE;
+                            isLexemeOver = true;
+                            break;
+                        case '}':
+                            actualTokenType = TokenType.RBRACE;
                             isLexemeOver = true;
                             break;
                         case ':':

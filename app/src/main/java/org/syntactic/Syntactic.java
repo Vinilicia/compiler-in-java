@@ -1,5 +1,6 @@
 package org.syntactic;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.token.Token;
 import org.token.TokenType;
@@ -14,16 +15,18 @@ public class Syntactic {
     public Syntactic(List<Token> tokens){
         this.tokens = tokens;
         this.token = tokens.get(0);
+        this.i = 0;
+        this.syntacticErrors = new ArrayList<>();
     }
 
     public void PrintError(){
         SyntacticError newError = new SyntacticError(token, token.getLineNumber());
+        System.err.println("Syntactic error. Token " + token.toString() + " not expected in input.");
         syntacticErrors.add(newError);
         i++;
         if (i < tokens.size()) {
             token = tokens.get(i);
         }
-        System.err.println("Syntactic error. Token " + token.toString() + " not expected in input.");
     }
     
     public boolean match(TokenType expectedType) {
@@ -147,14 +150,14 @@ public class Syntactic {
     }
 
     private void Type(){
-        if(token.getType() == TokenType.INT_CONST){
-            match(TokenType.INT_CONST);
+        if(token.getType() == TokenType.INT){
+            match(TokenType.INT);
         }
-        else if( token.getType() == TokenType.FLOAT_CONST){
-            match(TokenType.FLOAT_CONST);
+        else if( token.getType() == TokenType.FLOAT){
+            match(TokenType.FLOAT);
         }
-        else if(token.getType() == TokenType.CHAR_LITERAL){
-            match(TokenType.CHAR_LITERAL);
+        else if(token.getType() == TokenType.CHAR){
+            match(TokenType.CHAR);
         }
         else{
             PrintError();
@@ -204,7 +207,7 @@ public class Syntactic {
         if(token.getType() == TokenType.ASSIGN){
             match(TokenType.ASSIGN);
             Expr();
-            match(TokenType.COLON);
+            match(TokenType.SEMICOLON);
         }
         else if( token.getType() == TokenType.LBRACKET){
             match(TokenType.LBRACKET);
