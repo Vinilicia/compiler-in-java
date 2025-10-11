@@ -327,7 +327,10 @@ public class Syntactic {
     }
 
     private void AdicaoOpc() {
-        if (token.getType() == TokenType.PLUS) {
+        if (
+            token.getType() == TokenType.PLUS ||
+            token.getType() == TokenType.MINUS
+        ) {
             OpAdicao();
             Termo();
             AdicaoOpc();
