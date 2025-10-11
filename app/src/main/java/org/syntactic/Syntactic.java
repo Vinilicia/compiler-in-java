@@ -7,14 +7,22 @@ import org.token.TokenType;
 public class Syntactic {
 
     private final List<Token> tokens;
+    private List<SyntacticError> syntacticErrors;
     private Token token;
     private int i;
 
     public Syntactic(List<Token> tokens){
         this.tokens = tokens;
+        this.token = tokens.get(0);
     }
 
     public void PrintError(){
+        SyntacticError newError = new SyntacticError(token, token.getLineNumber());
+        syntacticErrors.add(newError);
+        i++;
+        if (i < tokens.size()) {
+            token = tokens.get(i);
+        }
         System.err.println("Syntactic error. Token " + token.toString() + " not expected in input.");
     }
     
@@ -33,7 +41,7 @@ public class Syntactic {
 
     public List<SyntacticError> syntacticAnalysis() {
         Programa();
-        return null;
+        return syntacticErrors;
     }
 
     private void Programa(){
@@ -193,8 +201,8 @@ public class Syntactic {
     }
 
     private void AtribuicaoOuChamada(){
-        if(token.getType() == TokenType.EQ){
-            match(TokenType.EQ);
+        if(token.getType() == TokenType.ASSIGN){
+            match(TokenType.ASSIGN);
             Expr();
             match(TokenType.COLON);
         }
@@ -226,6 +234,202 @@ public class Syntactic {
     }
 
     private void ComandoSenao(){
-        if(token.getType() == TokenType.)
+        if(token.getType() == TokenType.ELSE){
+            match(TokenType.ELSE);
+            ComandoSe();
+        }
+    }
+
+    private void Expr(){
+        if(token.getType() == TokenType.ID || token.getType() == TokenType.INT_CONST || token.getType() == TokenType.FLOAT_CONST || token.getType() == TokenType.CHAR_LITERAL || token.getType() == TokenType.LBRACKET){
+            Rel();
+            ExprOpc();
+        }
+        else{
+            PrintError();
+        }
+    }
+    
+    private void ExprOpc(){
+        if(token.getType() == TokenType.EQ){
+            OpIgual();
+            Rel();
+            ExprOpc();
+        }
+    }
+
+    private void OpIgual(){
+        if(token.getType() == TokenType.EQ){
+            match(TokenType.EQ);
+        }
+        else if(token.getType() == TokenType.NE){
+            match(TokenType.NE);
+        }
+        else{
+            PrintError();
+        }
+    }
+
+    private void Rel(){
+        if(token.getType() == TokenType.ID || token.getType() == TokenType.INT_CONST || token.getType() == TokenType.FLOAT_CONST || token.getType() == TokenType.CHAR_LITERAL || token.getType() == TokenType.LBRACKET){
+            Adicao();
+            RelOpc();
+        }
+        else{
+            PrintError();
+        }
+    }
+
+    private void RelOpc(){
+        if(token.getType() == TokenType.LT){
+            OpRel();
+            Adicao();
+            RelOpc();
+        }
+    }
+
+
+    private void OpRel(){
+        if(token.getType() == TokenType.LT){
+            match(TokenType.LT);
+        }
+        else if(token.getType() == TokenType.LE){
+            match(TokenType.LE);
+        }
+        else if(token.getType() == TokenType.GT){
+            match(TokenType.GT);
+        }
+        else if(token.getType() == TokenType.GE){
+            match(TokenType.GE);
+        }
+        else{
+            PrintError();
+        }
+    }
+
+    private void Adicao(){
+        if(token.getType() == TokenType.ID || token.getType() == TokenType.INT_CONST || token.getType() == TokenType.FLOAT_CONST || token.getType() == TokenType.CHAR_LITERAL || token.getType() == TokenType.LBRACKET){
+            Termo();
+            AdicaoOpc();
+        }
+        else{
+            PrintError();
+        }
+    }
+
+    private void AdicaoOpc(){
+        if(token.getType() == TokenType.PLUS){
+            OpAdicao();
+            Termo();
+            AdicaoOpc();
+        }
+    }
+
+    private void OpAdicao(){
+        if(token.getType() == TokenType.PLUS){
+            match(TokenType.PLUS);
+        }
+        else if(token.getType() == TokenType.MINUS){
+            match(TokenType.MINUS);
+        }
+        else{
+            PrintError();
+        }
+    }
+
+    private void Termo(){
+        if(token.getType() == TokenType.ID || token.getType() == TokenType.INT_CONST || token.getType() == TokenType.FLOAT_CONST || token.getType() == TokenType.CHAR_LITERAL || token.getType() == TokenType.LBRACKET){
+            Fator();
+            TermoOpc();
+        }
+        else{
+            PrintError();
+        }
+    }
+
+    private void TermoOpc(){
+        if(token.getType() == TokenType.MULT || token.getType() == TokenType.DIV){
+            OpMult();
+            Fator();
+            TermoOpc();
+        }
+    }
+
+    private void OpMult(){
+        if(token.getType() == TokenType.MULT){
+            match(TokenType.MULT);
+        }
+        else if(token.getType() == TokenType.DIV){
+            match(TokenType.DIV);
+        }
+        else{
+            PrintError();
+        }
+    }
+
+    private void Fator(){
+        if(token.getType() == TokenType.ID){
+            match(TokenType.ID);
+            ChamadaFuncao();
+        }
+        else if(token.getType() == TokenType.INT_CONST){
+            match(TokenType.INT_CONST);
+        }
+        else if(token.getType() == TokenType.FLOAT_CONST){
+            match(TokenType.FLOAT_CONST);
+        }
+        else if(token.getType() == TokenType.CHAR_LITERAL){
+            match(TokenType.CHAR_LITERAL);
+        }
+        else if(token.getType() == TokenType.LBRACKET){
+            match(TokenType.LBRACKET);
+            Expr();
+            match(TokenType.RBRACKET);
+        }
+        else{
+            PrintError();
+        }
+    }
+
+    private void ChamadaFuncao(){
+        if(token.getType() == TokenType.LBRACKET){
+            match(TokenType.LBRACKET);
+            ListaArgs();
+            match(TokenType.RBRACKET);
+        }
+    }
+
+    private void ListaArgs(){
+        if(token.getType() == TokenType.ID || token.getType() == TokenType.INT_CONST || token.getType() == TokenType.FLOAT_CONST || token.getType() == TokenType.CHAR_LITERAL){
+            Arg();
+            ListaArgs2();
+        }
+    }
+
+    private void ListaArgs2(){
+        if(token.getType() == TokenType.COLON){
+            match(TokenType.COLON);
+            Arg();
+            ListaArgs2();
+        }
+    }
+    
+    private void Arg(){
+        if(token.getType() == TokenType.ID){
+            match(TokenType.ID);
+            ChamadaFuncao();
+        }
+        else if(token.getType() == TokenType.INT_CONST){
+            match(TokenType.INT_CONST);
+        }
+        else if(token.getType() == TokenType.FLOAT_CONST){
+            match(TokenType.FLOAT_CONST);
+        }
+        else if(token.getType() == TokenType.CHAR_LITERAL){
+            match(TokenType.CHAR_LITERAL);
+        }
+        else{
+            PrintError();
+        }
     }
 }
