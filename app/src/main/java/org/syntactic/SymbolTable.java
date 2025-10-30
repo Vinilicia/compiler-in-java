@@ -28,8 +28,16 @@ public class SymbolTable {
         return functionName;
     }
 
+    public void setFunctioName(String name) {
+        this.functionName = name;
+    }
+
     public DataType getReturnType() {
         return returnType;
+    }
+
+    public void setReturnType(DataType type) {
+        this.returnType = type;
     }
 
     public Collection<TableEntry> getAllSymbols() {
