@@ -1,4 +1,4 @@
-package org.syntactic;
+package org.symbol_table;
 
 public enum DataType {
     ERROR,

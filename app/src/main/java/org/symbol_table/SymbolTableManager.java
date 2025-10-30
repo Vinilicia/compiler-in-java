@@ -1,4 +1,4 @@
-package org.syntactic;
+package org.symbol_table;
 
 import java.io.FileWriter;
 import java.io.IOException;

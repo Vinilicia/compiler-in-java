@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.List;
 import org.lexer.Lexer;
 import org.lexer.SourceReader;
-import org.syntactic.SymbolTableManager;
+import org.symbol_table.SymbolTableManager;
 import org.syntactic.Syntactic;
 import org.syntactic.SyntacticError;
 import org.token.Token;

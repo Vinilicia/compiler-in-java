@@ -1,4 +1,4 @@
-package org.syntactic;
+package org.symbol_table;
 
 import java.util.Collection;
 import java.util.HashMap;

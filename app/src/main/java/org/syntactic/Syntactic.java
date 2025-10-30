@@ -2,6 +2,9 @@ package org.syntactic;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.symbol_table.DataType;
+import org.symbol_table.SymbolTable;
+import org.symbol_table.SymbolTableManager;
 import org.token.Token;
 import org.token.TokenType;
 

@@ -1,4 +1,4 @@
-package org.syntactic;
+package org.symbol_table;
 
 import java.util.ArrayList;
 import java.util.List;
