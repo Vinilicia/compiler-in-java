@@ -4,18 +4,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SymbolTableManager {
 
     private Map<String, SymbolTable> tables;
+    private SymbolTable currentTable;
+    private int paramPos = 0;
 
     public SymbolTableManager() {
         tables = new HashMap<>();
-    }
-
-    public void createFunctionTable(String functionName, DataType returnType) {
-        tables.put(functionName, new SymbolTable(functionName, returnType));
     }
 
     public SymbolTable getTable(String functionName) {
@@ -25,6 +24,47 @@ public class SymbolTableManager {
     public void printAllTables() {
         for (SymbolTable t : tables.values()) {
             t.printTable();
+        }
+    }
+
+    public void createFunctionTable(String name, DataType retType) {
+        currentTable = new SymbolTable(name, retType);
+        tables.put(name, currentTable);
+        paramPos = 0;
+    }
+
+    public SymbolTable getCurrentTable() {
+        return currentTable;
+    }
+
+    public void closeCurrentTable() {
+        currentTable = null;
+    }
+
+    public void addParam(String name, DataType type) {
+        if (currentTable != null) {
+            currentTable.addSymbol(
+                new TableEntry(name, type, true, paramPos++)
+            );
+        }
+    }
+
+    public void addVariable(String name, DataType type) {
+        if (currentTable != null) {
+            currentTable.addSymbol(new TableEntry(name, type, false, -1));
+        }
+    }
+
+    public void addFunctionCall(String funcName, List<String> args) {
+        if (currentTable != null) {
+            FunctionRegister call = new FunctionRegister(funcName);
+            for (String arg : args) call.addArg(arg);
+            TableEntry record = currentTable.lookup(funcName);
+            if (record == null) {
+                record = new TableEntry(funcName, DataType.VOID, false, -1);
+                currentTable.addSymbol(record);
+            }
+            record.addCall(call);
         }
     }
 
