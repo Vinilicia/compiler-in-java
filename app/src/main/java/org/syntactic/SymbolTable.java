@@ -1,5 +1,6 @@
 package org.syntactic;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,6 +30,10 @@ public class SymbolTable {
 
     public DataType getReturnType() {
         return returnType;
+    }
+
+    public Collection<TableEntry> getAllSymbols() {
+        return table.values();
     }
 
     public void printTable() {
