@@ -56,10 +56,6 @@ public class SymbolTableManager {
                 );
                 out.println();
             }
-
-            System.out.println(
-                "Tabelas exportadas para o arquivo: " + filename
-            );
         } catch (IOException e) {
             System.err.println("Erro ao salvar as tabelas: " + e.getMessage());
         }
