@@ -9,6 +9,7 @@ public class Syntactic {
 
     private final List<Token> tokens;
     private List<SyntacticError> syntacticErrors;
+    private SymbolTableManager symbolManager = new SymbolTableManager();
     private Token token;
     private int i;
 
@@ -17,6 +18,10 @@ public class Syntactic {
         this.token = tokens.get(0);
         this.i = 0;
         this.syntacticErrors = new ArrayList<>();
+    }
+
+    public SymbolTableManager getSymbolTableManager() {
+        return symbolManager;
     }
 
     public void PrintError() {
