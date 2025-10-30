@@ -48,11 +48,11 @@ public class SymbolTable {
         System.out.println("Tabela de símbolos para a função: " + functionName);
         System.out.printf(
             "%-10s %-10s %-10s %-10s %-10s%n",
-            "chave",
             "name",
             "datatype",
             "is_param",
-            "pos_param"
+            "pos_param",
+            "call_refs"
         );
         for (TableEntry r : table.values()) {
             System.out.println(r);
