@@ -2,6 +2,9 @@ package org.syntactic;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.symbol_table.DataType;
+import org.symbol_table.SymbolTable;
+import org.symbol_table.SymbolTableManager;
 import org.token.Token;
 import org.token.TokenType;
 
@@ -9,6 +12,7 @@ public class Syntactic {
 
     private final List<Token> tokens;
     private List<SyntacticError> syntacticErrors;
+    private SymbolTableManager symbolManager = new SymbolTableManager();
     private Token token;
     private int i;
 
@@ -17,6 +21,10 @@ public class Syntactic {
         this.token = tokens.get(0);
         this.i = 0;
         this.syntacticErrors = new ArrayList<>();
+    }
+
+    public SymbolTableManager getSymbolTableManager() {
+        return symbolManager;
     }
 
     public void PrintError() {
@@ -72,12 +80,17 @@ public class Syntactic {
 
     private void Funcao() {
         match(TokenType.FUNCTION);
+        String funcName = token.getLexeme();
         NomeFuncao();
+        symbolManager.createFunctionTable(funcName, DataType.VOID);
+        SymbolTable currentTable = symbolManager.getCurrentTable();
         match(TokenType.LBRACKET);
         ListaParams();
         match(TokenType.RBRACKET);
-        TipoRetornoFuncao();
+        DataType retType = TipoRetornoFuncao();
+        currentTable.setReturnType(retType);
         Bloco();
+        symbolManager.closeCurrentTable();
     }
 
     private void NomeFuncao() {
@@ -92,9 +105,11 @@ public class Syntactic {
 
     private void ListaParams() {
         if (token.getType() == TokenType.ID) {
+            String paramName = token.getLexeme();
             match(TokenType.ID);
             match(TokenType.COLON);
-            Type();
+            DataType type = Type();
+            symbolManager.addParam(paramName, type);
             ListaParams2();
         }
     }
@@ -102,18 +117,21 @@ public class Syntactic {
     private void ListaParams2() {
         if (token.getType() == TokenType.COMMA) {
             match(TokenType.COMMA);
+            String paramName = token.getLexeme();
             match(TokenType.ID);
             match(TokenType.COLON);
-            Type();
+            DataType type = Type();
+            symbolManager.addParam(paramName, type);
             ListaParams2();
         }
     }
 
-    private void TipoRetornoFuncao() {
+    private DataType TipoRetornoFuncao() {
         if (token.getType() == TokenType.ARROW) {
             match(TokenType.ARROW);
-            Type();
+            return Type();
         }
+        return DataType.VOID;
     }
 
     private void Bloco() {
@@ -140,34 +158,48 @@ public class Syntactic {
 
     private void Declaracao() {
         match(TokenType.LET);
-        VarList();
+        List<String> vars = VarList();
         match(TokenType.COLON);
-        Type();
+        DataType type = Type();
         match(TokenType.SEMICOLON);
-    }
-
-    private void VarList() {
-        match(TokenType.ID);
-        VarList2();
-    }
-
-    private void VarList2() {
-        if (token.getType() == TokenType.COMMA) {
-            match(TokenType.COMMA);
-            match(TokenType.ID);
-            VarList2();
+        for (String v : vars) {
+            symbolManager.addVariable(v, type);
         }
     }
 
-    private void Type() {
-        if (token.getType() == TokenType.INT) {
-            match(TokenType.INT);
-        } else if (token.getType() == TokenType.FLOAT) {
-            match(TokenType.FLOAT);
-        } else if (token.getType() == TokenType.CHAR) {
-            match(TokenType.CHAR);
-        } else {
-            PrintError();
+    private List<String> VarList() {
+        List<String> vars = new ArrayList<>();
+        vars.add(token.getLexeme());
+        match(TokenType.ID);
+        vars.addAll(VarList2());
+        return vars;
+    }
+
+    private List<String> VarList2() {
+        List<String> vars = new ArrayList<>();
+        if (token.getType() == TokenType.COMMA) {
+            match(TokenType.COMMA);
+            vars.add(token.getLexeme());
+            match(TokenType.ID);
+            vars.addAll(VarList2());
+        }
+        return vars;
+    }
+
+    private DataType Type() {
+        switch (token.getType()) {
+            case INT:
+                match(TokenType.INT);
+                return DataType.INT;
+            case FLOAT:
+                match(TokenType.FLOAT);
+                return DataType.FLOAT;
+            case CHAR:
+                match(TokenType.CHAR);
+                return DataType.CHAR;
+            default:
+                PrintError();
+                return DataType.ERROR;
         }
     }
 
@@ -385,8 +417,9 @@ public class Syntactic {
 
     private void Fator() {
         if (token.getType() == TokenType.ID) {
+            String idName = token.getLexeme();
             match(TokenType.ID);
-            ChamadaFuncao();
+            ChamadaFuncao(idName);
         } else if (token.getType() == TokenType.INT_CONST) {
             match(TokenType.INT_CONST);
         } else if (token.getType() == TokenType.FLOAT_CONST) {
@@ -402,46 +435,57 @@ public class Syntactic {
         }
     }
 
-    private void ChamadaFuncao() {
+    private void ChamadaFuncao(String funcName) {
         if (token.getType() == TokenType.LBRACKET) {
             match(TokenType.LBRACKET);
-            ListaArgs();
+            List<String> args = ListaArgs();
             match(TokenType.RBRACKET);
+            symbolManager.addFunctionCall(funcName, args);
         }
     }
 
-    private void ListaArgs() {
+    private List<String> ListaArgs() {
+        List<String> args = new ArrayList<>();
         if (
             token.getType() == TokenType.ID ||
             token.getType() == TokenType.INT_CONST ||
             token.getType() == TokenType.FLOAT_CONST ||
             token.getType() == TokenType.CHAR_LITERAL
         ) {
-            Arg();
-            ListaArgs2();
+            args.add(Arg());
+            args.addAll(ListaArgs2());
         }
+        return args;
     }
 
-    private void ListaArgs2() {
+    private List<String> ListaArgs2() {
+        List<String> args = new ArrayList<>();
         if (token.getType() == TokenType.COMMA) {
             match(TokenType.COMMA);
-            Arg();
-            ListaArgs2();
+            args.add(Arg());
+            args.addAll(ListaArgs2());
         }
+        return args;
     }
 
-    private void Arg() {
+    private String Arg() {
+        String value = "";
         if (token.getType() == TokenType.ID) {
+            value = token.getLexeme();
             match(TokenType.ID);
-            ChamadaFuncao();
+            ChamadaFuncao(value);
         } else if (token.getType() == TokenType.INT_CONST) {
+            value = token.getLexeme();
             match(TokenType.INT_CONST);
         } else if (token.getType() == TokenType.FLOAT_CONST) {
+            value = token.getLexeme();
             match(TokenType.FLOAT_CONST);
         } else if (token.getType() == TokenType.CHAR_LITERAL) {
+            value = token.getLexeme();
             match(TokenType.CHAR_LITERAL);
         } else {
             PrintError();
         }
+        return value;
     }
 }

@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 import org.lexer.Lexer;
 import org.lexer.SourceReader;
+import org.symbol_table.SymbolTableManager;
 import org.syntactic.Syntactic;
 import org.syntactic.SyntacticError;
 import org.token.Token;
@@ -24,9 +25,12 @@ public class App {
         try {
             File inputFile = new File(filePath);
             String fileName = inputFile.getName();
-            String outputFileNameLexer = "output/" + fileName.replace(".p", "_tokens.json");
-            String outputFileNameSyntactic = "output/" + fileName.replace(".p", "_syntactic_errors.json");
-
+            String outputFileNameLexer =
+                "output/" + fileName.replace(".p", "_tokens.json");
+            String outputFileNameSyntactic =
+                "output/" + fileName.replace(".p", "_syntactic_errors.json");
+            String outputFileNameSymbolTable =
+                "output/" + fileName.replace(".p", "_symbol_tables.txt");
 
             // Create output directory if it doesn't exist
             new File("output").mkdirs();
@@ -38,9 +42,16 @@ public class App {
             Token.saveTokensToJsonFile(tokens, outputFileNameLexer);
 
             Syntactic syntactic = new Syntactic(tokens);
-            List<SyntacticError> syntacticErrors = syntactic.syntacticAnalysis();
-            SyntacticError.saveSyntacticErrorsToJsonFile(syntacticErrors, outputFileNameSyntactic);
+            List<SyntacticError> syntacticErrors =
+                syntactic.syntacticAnalysis();
+            SyntacticError.saveSyntacticErrorsToJsonFile(
+                syntacticErrors,
+                outputFileNameSyntactic
+            );
 
+            SymbolTableManager symbolManager =
+                syntactic.getSymbolTableManager();
+            symbolManager.exportAllTablesToFile(outputFileNameSymbolTable);
 
             System.out.println("Files saved to " + filePath);
         } catch (Exception e) {
