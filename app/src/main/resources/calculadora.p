@@ -1,4 +1,4 @@
-fn calculadora(op: char, x: float, y: float) -> float {
+fn calculadora(op: char, x: int, y: float) -> float {
     if op == '+' {
         return x + y;
     }
@@ -18,8 +18,9 @@ fn calculadora(op: char, x: float, y: float) -> float {
 }
 
 fn main(){ 
-    let a, b: float;
-    a = 1.8;
-    b = 7.2;
+    let a: int;
+    let b: float;
+    a = 1;
+    b = 7;
     println("{}", calculadora('*', a, b));
 }

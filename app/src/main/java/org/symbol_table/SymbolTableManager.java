@@ -41,24 +41,41 @@ public class SymbolTableManager {
         currentTable = null;
     }
 
-    public void addParam(String name, DataType type) {
+    public boolean addParam(String name, DataType type) {
         if (currentTable != null) {
+            if (currentTable.lookup(name) != null) {
+                return false; // Redeclaration
+            }
             currentTable.addSymbol(
-                new TableEntry(name, type, true, paramPos++)
-            );
+                    new TableEntry(name, type, true, paramPos++));
+            return true;
         }
+        return false;
     }
 
-    public void addVariable(String name, DataType type) {
+    public boolean addVariable(String name, DataType type) {
         if (currentTable != null) {
+            if (currentTable.lookup(name) != null) {
+                return false; // Redeclaration
+            }
             currentTable.addSymbol(new TableEntry(name, type, false, -1));
+            return true;
         }
+        return false;
+    }
+
+    public TableEntry lookup(String name) {
+        if (currentTable != null) {
+            return currentTable.lookup(name);
+        }
+        return null;
     }
 
     public void addFunctionCall(String funcName, List<String> args) {
         if (currentTable != null) {
             FunctionRegister call = new FunctionRegister(funcName);
-            for (String arg : args) call.addArg(arg);
+            for (String arg : args)
+                call.addArg(arg);
             TableEntry record = currentTable.lookup(funcName);
             if (record == null) {
                 record = new TableEntry(funcName, DataType.VOID, false, -1);
@@ -72,27 +89,24 @@ public class SymbolTableManager {
         try (PrintWriter out = new PrintWriter(new FileWriter(filename))) {
             for (SymbolTable table : tables.values()) {
                 out.println(
-                    "Tabela de símbolos para a função: " +
-                        table.getFunctionName()
-                );
+                        "Tabela de símbolos para a função: " +
+                                table.getFunctionName());
                 out.printf(
-                    "%-10s %-10s %-10s %-10s %-10s%n",
-                    "name",
-                    "datatype",
-                    "is_param",
-                    "pos_param",
-                    "call_refs"
-                );
+                        "%-10s %-10s %-10s %-10s %-10s%n",
+                        "name",
+                        "datatype",
+                        "is_param",
+                        "pos_param",
+                        "call_refs");
                 for (TableEntry record : table.getAllSymbols()) {
                     out.println(record);
                 }
 
                 out.println(
-                    "ret_type(" +
-                        table.getFunctionName() +
-                        "): " +
-                        table.getReturnType()
-                );
+                        "ret_type(" +
+                                table.getFunctionName() +
+                                "): " +
+                                table.getReturnType());
                 out.println();
             }
         } catch (IOException e) {

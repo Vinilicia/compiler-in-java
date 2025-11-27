@@ -1,0 +1,14 @@
+Tabela de símbolos para a função: main
+name       datatype   is_param   pos_param  call_refs 
+a          INT        false      -1         NULL
+b          FLOAT      false      -1         NULL
+calculadora VOID       false      -1         [FunctionRegister{name='calculadora', numArgs=3, args=['*', a, b]}]
+ret_type(main): VOID
+
+Tabela de símbolos para a função: calculadora
+name       datatype   is_param   pos_param  call_refs 
+op         CHAR       true       0          NULL
+x          INT        true       1          NULL
+y          FLOAT      true       2          NULL
+ret_type(calculadora): FLOAT
+

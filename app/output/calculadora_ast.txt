@@ -1,0 +1,68 @@
+FunctionNode (Name: calculadora)
+  Bloco
+    IfNode
+      RelOp (Op: ==) [Type: INT]
+        IdNode (Name: op) [Type: CHAR]
+        CharConstNode (Value: +) [Type: CHAR]
+      Bloco
+        ReturnNode
+          AritOp (Op: +) [Type: FLOAT]
+            CastNode (Target: FLOAT) [Type: FLOAT]
+              IdNode (Name: x) [Type: INT]
+            IdNode (Name: y) [Type: FLOAT]
+      IfNode
+        RelOp (Op: ==) [Type: INT]
+          IdNode (Name: op) [Type: CHAR]
+          CharConstNode (Value: -) [Type: CHAR]
+        Bloco
+          ReturnNode
+            AritOp (Op: -) [Type: FLOAT]
+              CastNode (Target: FLOAT) [Type: FLOAT]
+                IdNode (Name: x) [Type: INT]
+              IdNode (Name: y) [Type: FLOAT]
+        IfNode
+          RelOp (Op: ==) [Type: INT]
+            IdNode (Name: op) [Type: CHAR]
+            CharConstNode (Value: *) [Type: CHAR]
+          Bloco
+            ReturnNode
+              AritOp (Op: *) [Type: FLOAT]
+                CastNode (Target: FLOAT) [Type: FLOAT]
+                  IdNode (Name: x) [Type: INT]
+                IdNode (Name: y) [Type: FLOAT]
+          IfNode
+            RelOp (Op: ==) [Type: INT]
+              IdNode (Name: op) [Type: CHAR]
+              CharConstNode (Value: /) [Type: CHAR]
+            Bloco
+              IfNode
+                RelOp (Op: ==) [Type: INT]
+                  IdNode (Name: y) [Type: FLOAT]
+                  CastNode (Target: FLOAT) [Type: FLOAT]
+                    IntConstNode (Value: 0) [Type: INT]
+                Bloco
+                  ReturnNode
+                    FloatConstNode (Value: 0.0) [Type: FLOAT]
+              ReturnNode
+                AritOp (Op: /) [Type: FLOAT]
+                  CastNode (Target: FLOAT) [Type: FLOAT]
+                    IdNode (Name: x) [Type: INT]
+                  IdNode (Name: y) [Type: FLOAT]
+    ReturnNode
+      FloatConstNode (Value: 0.0) [Type: FLOAT]
+
+FunctionNode (Name: main)
+  Bloco
+    AssignNode
+      IdNode (Name: a) [Type: INT]
+      IntConstNode (Value: 1) [Type: INT]
+    AssignNode
+      IdNode (Name: b) [Type: FLOAT]
+      CastNode (Target: FLOAT) [Type: FLOAT]
+        IntConstNode (Value: 7) [Type: INT]
+    PrintNode
+      CallNode (Func: calculadora) [Type: FLOAT]
+        CharConstNode (Value: *) [Type: CHAR]
+        IdNode (Name: a) [Type: INT]
+        IdNode (Name: b) [Type: FLOAT]
+

@@ -1,0 +1,23 @@
+FunctionNode (Name: soma)
+  Bloco
+    ReturnNode
+      AritOp (Op: +) [Type: INT]
+        IdNode (Name: x) [Type: INT]
+        IdNode (Name: y) [Type: INT]
+
+FunctionNode (Name: main)
+  Bloco
+    AssignNode
+      IdNode (Name: b) [Type: INT]
+      IntConstNode (Value: 40) [Type: INT]
+    AssignNode
+      IdNode (Name: c) [Type: INT]
+      IntConstNode (Value: 39) [Type: INT]
+    AssignNode
+      IdNode (Name: a) [Type: INT]
+      CallNode (Func: soma) [Type: INT]
+        IdNode (Name: b) [Type: INT]
+        IdNode (Name: c) [Type: INT]
+    PrintNode
+      IdNode (Name: a) [Type: INT]
+

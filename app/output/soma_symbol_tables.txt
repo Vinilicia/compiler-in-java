@@ -1,0 +1,14 @@
+Tabela de símbolos para a função: soma
+name       datatype   is_param   pos_param  call_refs 
+x          INT        true       0          NULL
+y          INT        true       1          NULL
+ret_type(soma): INT
+
+Tabela de símbolos para a função: main
+name       datatype   is_param   pos_param  call_refs 
+a          INT        false      -1         NULL
+b          INT        false      -1         NULL
+c          INT        false      -1         NULL
+soma       VOID       false      -1         [FunctionRegister{name='soma', numArgs=2, args=[b, c]}]
+ret_type(main): VOID
+

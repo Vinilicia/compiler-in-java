@@ -1,0 +1,297 @@
+[
+  {
+    "lexeme": "fn",
+    "type": "FUNCTION",
+    "lineNumber": 1
+  },
+  {
+    "lexeme": "soma",
+    "type": "ID",
+    "lineNumber": 1
+  },
+  {
+    "lexeme": "(",
+    "type": "LBRACKET",
+    "lineNumber": 1
+  },
+  {
+    "lexeme": "x",
+    "type": "ID",
+    "lineNumber": 1
+  },
+  {
+    "lexeme": ":",
+    "type": "COLON",
+    "lineNumber": 1
+  },
+  {
+    "lexeme": "int",
+    "type": "INT",
+    "lineNumber": 1
+  },
+  {
+    "lexeme": ",",
+    "type": "COMMA",
+    "lineNumber": 1
+  },
+  {
+    "lexeme": "y",
+    "type": "ID",
+    "lineNumber": 1
+  },
+  {
+    "lexeme": ":",
+    "type": "COLON",
+    "lineNumber": 1
+  },
+  {
+    "lexeme": "int",
+    "type": "INT",
+    "lineNumber": 1
+  },
+  {
+    "lexeme": ")",
+    "type": "RBRACKET",
+    "lineNumber": 1
+  },
+  {
+    "lexeme": "->",
+    "type": "ARROW",
+    "lineNumber": 1
+  },
+  {
+    "lexeme": "int",
+    "type": "INT",
+    "lineNumber": 1
+  },
+  {
+    "lexeme": "{",
+    "type": "LBRACE",
+    "lineNumber": 1
+  },
+  {
+    "lexeme": "return",
+    "type": "RETURN",
+    "lineNumber": 2
+  },
+  {
+    "lexeme": "x",
+    "type": "ID",
+    "lineNumber": 2
+  },
+  {
+    "lexeme": "+",
+    "type": "PLUS",
+    "lineNumber": 2
+  },
+  {
+    "lexeme": "y",
+    "type": "ID",
+    "lineNumber": 2
+  },
+  {
+    "lexeme": ";",
+    "type": "SEMICOLON",
+    "lineNumber": 2
+  },
+  {
+    "lexeme": "}",
+    "type": "RBRACE",
+    "lineNumber": 3
+  },
+  {
+    "lexeme": "fn",
+    "type": "FUNCTION",
+    "lineNumber": 5
+  },
+  {
+    "lexeme": "main",
+    "type": "MAIN",
+    "lineNumber": 5
+  },
+  {
+    "lexeme": "(",
+    "type": "LBRACKET",
+    "lineNumber": 5
+  },
+  {
+    "lexeme": ")",
+    "type": "RBRACKET",
+    "lineNumber": 5
+  },
+  {
+    "lexeme": "{",
+    "type": "LBRACE",
+    "lineNumber": 5
+  },
+  {
+    "lexeme": "let",
+    "type": "LET",
+    "lineNumber": 6
+  },
+  {
+    "lexeme": "a",
+    "type": "ID",
+    "lineNumber": 6
+  },
+  {
+    "lexeme": ",",
+    "type": "COMMA",
+    "lineNumber": 6
+  },
+  {
+    "lexeme": "b",
+    "type": "ID",
+    "lineNumber": 6
+  },
+  {
+    "lexeme": ",",
+    "type": "COMMA",
+    "lineNumber": 6
+  },
+  {
+    "lexeme": "c",
+    "type": "ID",
+    "lineNumber": 6
+  },
+  {
+    "lexeme": ":",
+    "type": "COLON",
+    "lineNumber": 6
+  },
+  {
+    "lexeme": "int",
+    "type": "INT",
+    "lineNumber": 6
+  },
+  {
+    "lexeme": ";",
+    "type": "SEMICOLON",
+    "lineNumber": 6
+  },
+  {
+    "lexeme": "b",
+    "type": "ID",
+    "lineNumber": 7
+  },
+  {
+    "lexeme": "=",
+    "type": "ASSIGN",
+    "lineNumber": 7
+  },
+  {
+    "lexeme": "40",
+    "type": "INT_CONST",
+    "lineNumber": 7
+  },
+  {
+    "lexeme": ";",
+    "type": "SEMICOLON",
+    "lineNumber": 7
+  },
+  {
+    "lexeme": "c",
+    "type": "ID",
+    "lineNumber": 8
+  },
+  {
+    "lexeme": "=",
+    "type": "ASSIGN",
+    "lineNumber": 8
+  },
+  {
+    "lexeme": "39",
+    "type": "INT_CONST",
+    "lineNumber": 8
+  },
+  {
+    "lexeme": ";",
+    "type": "SEMICOLON",
+    "lineNumber": 8
+  },
+  {
+    "lexeme": "a",
+    "type": "ID",
+    "lineNumber": 9
+  },
+  {
+    "lexeme": "=",
+    "type": "ASSIGN",
+    "lineNumber": 9
+  },
+  {
+    "lexeme": "soma",
+    "type": "ID",
+    "lineNumber": 9
+  },
+  {
+    "lexeme": "(",
+    "type": "LBRACKET",
+    "lineNumber": 9
+  },
+  {
+    "lexeme": "b",
+    "type": "ID",
+    "lineNumber": 9
+  },
+  {
+    "lexeme": ",",
+    "type": "COMMA",
+    "lineNumber": 9
+  },
+  {
+    "lexeme": "c",
+    "type": "ID",
+    "lineNumber": 9
+  },
+  {
+    "lexeme": ")",
+    "type": "RBRACKET",
+    "lineNumber": 9
+  },
+  {
+    "lexeme": ";",
+    "type": "SEMICOLON",
+    "lineNumber": 9
+  },
+  {
+    "lexeme": "println",
+    "type": "PRINTLN",
+    "lineNumber": 10
+  },
+  {
+    "lexeme": "(",
+    "type": "LBRACKET",
+    "lineNumber": 10
+  },
+  {
+    "lexeme": "\"{}\"",
+    "type": "FMT_STRING",
+    "lineNumber": 10
+  },
+  {
+    "lexeme": ",",
+    "type": "COMMA",
+    "lineNumber": 10
+  },
+  {
+    "lexeme": "a",
+    "type": "ID",
+    "lineNumber": 10
+  },
+  {
+    "lexeme": ")",
+    "type": "RBRACKET",
+    "lineNumber": 10
+  },
+  {
+    "lexeme": ";",
+    "type": "SEMICOLON",
+    "lineNumber": 10
+  },
+  {
+    "lexeme": "}",
+    "type": "RBRACE",
+    "lineNumber": 11
+  }
+]

@@ -12,11 +12,10 @@ public class TableEntry {
     List<FunctionRegister> callRefs;
 
     public TableEntry(
-        String name,
-        DataType datatype,
-        boolean isParam,
-        int posParam
-    ) {
+            String name,
+            DataType datatype,
+            boolean isParam,
+            int posParam) {
         this.name = name;
         this.datatype = datatype;
         this.isParam = isParam;
@@ -28,15 +27,30 @@ public class TableEntry {
         callRefs.add(call);
     }
 
+    public DataType getDatatype() {
+        return datatype;
+    }
+
+    public boolean isParam() {
+        return isParam;
+    }
+
+    public int getPosParam() {
+        return posParam;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toString() {
         return String.format(
-            "%-10s %-10s %-10s %-10d %s",
-            name,
-            datatype,
-            isParam,
-            posParam,
-            callRefs.isEmpty() ? "NULL" : callRefs.toString()
-        );
+                "%-10s %-10s %-10s %-10d %s",
+                name,
+                datatype,
+                isParam,
+                posParam,
+                callRefs.isEmpty() ? "NULL" : callRefs.toString());
     }
 }
