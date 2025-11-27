@@ -1,0 +1,18 @@
+[
+  {
+    "token": {
+      "lexeme": "[",
+      "type": "ERROR",
+      "lineNumber": 3
+    },
+    "lineNumber": 3
+  },
+  {
+    "token": {
+      "lexeme": "]",
+      "type": "ERROR",
+      "lineNumber": 3
+    },
+    "lineNumber": 3
+  }
+]

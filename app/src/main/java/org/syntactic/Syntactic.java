@@ -6,7 +6,6 @@ import org.ast.*;
 import org.symbol_table.DataType;
 import org.symbol_table.SymbolTable;
 import org.symbol_table.SymbolTableManager;
-import org.symbol_table.TableEntry;
 import org.token.Token;
 import org.token.TokenType;
 
@@ -285,18 +284,6 @@ public class Syntactic {
             List<AstNode> args = ListaArgs();
             match(TokenType.RBRACKET);
             match(TokenType.SEMICOLON);
-            // Check if function is declared? Or add call ref.
-            // Requirement says "vetor de referências". Logic in addFunctionCall handles it.
-            List<String> argNames = new ArrayList<>(); // We need strings for addFunctionCall, but we have nodes now.
-            // This is tricky. addFunctionCall expects List<String>.
-            // But args are expressions now.
-            // The original code passed List<String> from ListaArgs.
-            // But ListaArgs can contain expressions.
-            // Let's keep addFunctionCall for Symbol Table purposes, but we might need to
-            // extract names if possible, or just skip it if it's complex expr.
-            // Actually, the original code only supported simple args?
-            // "ListaArgs" calls "Arg". "Arg" handles ID, CONSTs.
-            // So we can extract text from nodes if they are simple.
 
             List<String> strArgs = new ArrayList<>();
             for (AstNode node : args) {
@@ -348,9 +335,6 @@ public class Syntactic {
     private AstNode ComandoSenao() {
         if (token.getType() == TokenType.ELSE) {
             match(TokenType.ELSE);
-            // Recursively call ComandoSe?
-            // Original: ComandoSe().
-            // But ComandoSe returns AstNode (IfNode or Bloco).
             return ComandoSe();
         }
         return null;
@@ -565,7 +549,6 @@ public class Syntactic {
             List<AstNode> args = ListaArgs();
             match(TokenType.RBRACKET);
 
-            // Add function call to symbol table
             List<String> strArgs = new ArrayList<>();
             for (AstNode node : args) {
                 if (node instanceof IdNode)

@@ -1,0 +1,18 @@
+FunctionNode (Name: main)
+  Bloco
+    AssignNode
+      IdNode (Name: i) [Type: INT]
+      IntConstNode (Value: 0) [Type: INT]
+    WhileNode
+      RelOp (Op: <) [Type: INT]
+        IdNode (Name: i) [Type: INT]
+        IntConstNode (Value: 10) [Type: INT]
+      Bloco
+        PrintNode
+          IdNode (Name: i) [Type: INT]
+        AssignNode
+          IdNode (Name: i) [Type: INT]
+          AritOp (Op: +) [Type: INT]
+            IdNode (Name: i) [Type: INT]
+            IntConstNode (Value: 1) [Type: INT]
+

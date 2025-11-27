@@ -1,0 +1,242 @@
+[
+  {
+    "lexeme": "fn",
+    "type": "FUNCTION",
+    "lineNumber": 1
+  },
+  {
+    "lexeme": "main",
+    "type": "MAIN",
+    "lineNumber": 1
+  },
+  {
+    "lexeme": "(",
+    "type": "LBRACKET",
+    "lineNumber": 1
+  },
+  {
+    "lexeme": ")",
+    "type": "RBRACKET",
+    "lineNumber": 1
+  },
+  {
+    "lexeme": "{",
+    "type": "LBRACE",
+    "lineNumber": 1
+  },
+  {
+    "lexeme": "let",
+    "type": "LET",
+    "lineNumber": 2
+  },
+  {
+    "lexeme": "a",
+    "type": "ID",
+    "lineNumber": 2
+  },
+  {
+    "lexeme": ",",
+    "type": "COMMA",
+    "lineNumber": 2
+  },
+  {
+    "lexeme": "b",
+    "type": "ID",
+    "lineNumber": 2
+  },
+  {
+    "lexeme": ",",
+    "type": "COMMA",
+    "lineNumber": 2
+  },
+  {
+    "lexeme": "c",
+    "type": "ID",
+    "lineNumber": 2
+  },
+  {
+    "lexeme": ",",
+    "type": "COMMA",
+    "lineNumber": 2
+  },
+  {
+    "lexeme": "media",
+    "type": "ID",
+    "lineNumber": 2
+  },
+  {
+    "lexeme": ":",
+    "type": "COLON",
+    "lineNumber": 2
+  },
+  {
+    "lexeme": "float",
+    "type": "FLOAT",
+    "lineNumber": 2
+  },
+  {
+    "lexeme": ";",
+    "type": "SEMICOLON",
+    "lineNumber": 2
+  },
+  {
+    "lexeme": "a",
+    "type": "ID",
+    "lineNumber": 3
+  },
+  {
+    "lexeme": "=",
+    "type": "ASSIGN",
+    "lineNumber": 3
+  },
+  {
+    "lexeme": "8.2",
+    "type": "FLOAT_CONST",
+    "lineNumber": 3
+  },
+  {
+    "lexeme": ";",
+    "type": "SEMICOLON",
+    "lineNumber": 3
+  },
+  {
+    "lexeme": "b",
+    "type": "ID",
+    "lineNumber": 4
+  },
+  {
+    "lexeme": "=",
+    "type": "ASSIGN",
+    "lineNumber": 4
+  },
+  {
+    "lexeme": "6.5",
+    "type": "FLOAT_CONST",
+    "lineNumber": 4
+  },
+  {
+    "lexeme": ";",
+    "type": "SEMICOLON",
+    "lineNumber": 4
+  },
+  {
+    "lexeme": "c",
+    "type": "ID",
+    "lineNumber": 5
+  },
+  {
+    "lexeme": "=",
+    "type": "ASSIGN",
+    "lineNumber": 5
+  },
+  {
+    "lexeme": "7.0",
+    "type": "FLOAT_CONST",
+    "lineNumber": 5
+  },
+  {
+    "lexeme": ";",
+    "type": "SEMICOLON",
+    "lineNumber": 5
+  },
+  {
+    "lexeme": "media",
+    "type": "ID",
+    "lineNumber": 6
+  },
+  {
+    "lexeme": "=",
+    "type": "ASSIGN",
+    "lineNumber": 6
+  },
+  {
+    "lexeme": "(",
+    "type": "LBRACKET",
+    "lineNumber": 6
+  },
+  {
+    "lexeme": "a",
+    "type": "ID",
+    "lineNumber": 6
+  },
+  {
+    "lexeme": "+",
+    "type": "PLUS",
+    "lineNumber": 6
+  },
+  {
+    "lexeme": "b",
+    "type": "ID",
+    "lineNumber": 6
+  },
+  {
+    "lexeme": "+",
+    "type": "PLUS",
+    "lineNumber": 6
+  },
+  {
+    "lexeme": "c",
+    "type": "ID",
+    "lineNumber": 6
+  },
+  {
+    "lexeme": ")",
+    "type": "RBRACKET",
+    "lineNumber": 6
+  },
+  {
+    "lexeme": "/",
+    "type": "DIV",
+    "lineNumber": 6
+  },
+  {
+    "lexeme": "3.0",
+    "type": "FLOAT_CONST",
+    "lineNumber": 6
+  },
+  {
+    "lexeme": ";",
+    "type": "SEMICOLON",
+    "lineNumber": 6
+  },
+  {
+    "lexeme": "println",
+    "type": "PRINTLN",
+    "lineNumber": 8
+  },
+  {
+    "lexeme": "(",
+    "type": "LBRACKET",
+    "lineNumber": 8
+  },
+  {
+    "lexeme": "\"{}\"",
+    "type": "FMT_STRING",
+    "lineNumber": 8
+  },
+  {
+    "lexeme": ",",
+    "type": "COMMA",
+    "lineNumber": 8
+  },
+  {
+    "lexeme": "media",
+    "type": "ID",
+    "lineNumber": 8
+  },
+  {
+    "lexeme": ")",
+    "type": "RBRACKET",
+    "lineNumber": 8
+  },
+  {
+    "lexeme": ";",
+    "type": "SEMICOLON",
+    "lineNumber": 8
+  },
+  {
+    "lexeme": "}",
+    "type": "RBRACE",
+    "lineNumber": 9
+  }
+]

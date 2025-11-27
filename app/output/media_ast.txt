@@ -1,0 +1,23 @@
+FunctionNode (Name: main)
+  Bloco
+    AssignNode
+      IdNode (Name: a) [Type: FLOAT]
+      FloatConstNode (Value: 8.2) [Type: FLOAT]
+    AssignNode
+      IdNode (Name: b) [Type: FLOAT]
+      FloatConstNode (Value: 6.5) [Type: FLOAT]
+    AssignNode
+      IdNode (Name: c) [Type: FLOAT]
+      FloatConstNode (Value: 7.0) [Type: FLOAT]
+    AssignNode
+      IdNode (Name: media) [Type: FLOAT]
+      AritOp (Op: /) [Type: FLOAT]
+        AritOp (Op: +) [Type: FLOAT]
+          AritOp (Op: +) [Type: FLOAT]
+            IdNode (Name: a) [Type: FLOAT]
+            IdNode (Name: b) [Type: FLOAT]
+          IdNode (Name: c) [Type: FLOAT]
+        FloatConstNode (Value: 3.0) [Type: FLOAT]
+    PrintNode
+      IdNode (Name: media) [Type: FLOAT]
+

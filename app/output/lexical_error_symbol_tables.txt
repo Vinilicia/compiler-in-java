@@ -1,0 +1,7 @@
+Tabela de símbolos para a função: main
+name       datatype   is_param   pos_param  call_refs 
+a          INT        false      -1         NULL
+b          INT        false      -1         NULL
+c          INT        false      -1         NULL
+ret_type(main): VOID
+
